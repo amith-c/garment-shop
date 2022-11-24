@@ -27,6 +27,7 @@ def insertProduct(id, name, company, price, stock_remaining):
 def deleteProduct(id):
     global cur
     cur.execute("delete from stock where pid=%s"%(id, )) #type: ignore
+    conn.commit()
 
 def searchProduct(id):
     global cur

@@ -1,14 +1,18 @@
 import database 
 import keyboard
 import os
-from tabulate import tabulate
+from table import showTable
+from colorama import init, Style
+
+init()
 
 
 def main():
     running = True
     while running:
         os.system('cls')
-        print("Garment Shop Management System\n")
+        print("Garment Shop Management System")
+        print(Style.DIM + "Enter an option\n" + Style.NORMAL)
         print("Press the corresponding number:")
         print("1. Display all products")
         print("2. Add a new product")
@@ -29,7 +33,7 @@ def main():
                     modifyProduct()
                     break
                 if keyboard.is_pressed("4"):
-                    insertNewProduct()
+                    deleteProduct()
                     break
                 if keyboard.is_pressed("5"):
                     showStock()
@@ -43,7 +47,7 @@ def main():
 def displayProducts():
     os.system("cls")  # Used to clear the output screen
     recs = database.readAllRecords()
-    print(tabulate(recs, headers=["ID", "Product Name", "Company", "Price", "Stock"]))
+    showTable(recs, headers=["ID", "Product Name", "Company", "Price", "Stock"])
     input("\nPress Enter to continue...")
     
 def insertNewProduct():
@@ -86,8 +90,8 @@ def deleteProduct():
 def showStock():
     os.system("cls")  # Used to clear the output screen
     id = int(input("Enter ID of product to search: "))
-    recs = database.readOneRecord(id)
-    print(tabulate(recs, headers=["ID", "Product Name", "Company", "Price", "Stock"]))
+    record = database.readOneRecord(id)
+    showTable([record], ["ID", "Product Name", "Company", "Price", "Stock"])
     input("\nPress Enter to continue...")  
 
 main()
