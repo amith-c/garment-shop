@@ -40,5 +40,3 @@ def updateRecord(id, name, company, price, stock):
     cur.execute("update stock set pname='%s', company='%s', price=%s, stockremaining=%s where pid=%s"%(name, company, price, stock, id)) #type: ignore
 
 connect()
-# print(readAllRecords())
-# insertProduct(2, "Woolen Jacket", "Gucci", 3500, 3)
